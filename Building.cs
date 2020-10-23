@@ -9,9 +9,9 @@ public class Building : MonoBehaviour
 
     #endregion
 
-
+    public int ID = 0;
     #region UnityMethods
-    
+
     private void OnDrawGizmos()
     {
         for (int x = 0; x < Size.x; x++)
@@ -33,6 +33,12 @@ public class Building : MonoBehaviour
 
     #region Methods
 
+    private void Start()
+    {
+        ID = 0;
+    }
+
+
     public void SetTransparent(bool available)
     {
         if (available)
@@ -49,6 +55,7 @@ public class Building : MonoBehaviour
     {
         MainRenderer.material.color = Color.white;
     }
+
 
     #endregion
 }

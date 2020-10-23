@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+
 
 public class ResourcesCalculation : MonoBehaviour
 {
@@ -22,7 +24,9 @@ public class ResourcesCalculation : MonoBehaviour
 
     public void Calculate()
     {
-        _GlobalDB.Time++;
+        //_GlobalDB.Time++;
+        _GlobalDB.MasRes[_GlobalDB.Time] += 1;
+        _GlobalDB.Calculate();
     }
 
 

@@ -40,21 +40,24 @@ public class BackgroundUI : MonoBehaviour
 
     public void Draw()
     {
-        Time.text = _GlobalDB.Time.ToString();
-        Rover.text = _GlobalDB.Rover.ToString();
-        Alloy.text = _GlobalDB.Alloy.ToString();
-        Polymers.text = _GlobalDB.Polymers.ToString();
-        Electronics.text = _GlobalDB.Electronics.ToString();
-        Water.text = _GlobalDB.Water.ToString();
-        Re.text = _GlobalDB.Re.ToString();
-        Energy.text = _GlobalDB.Energy.ToString();
-        Chemicals.text = _GlobalDB.Chemicals.ToString();
-        Ore.text = _GlobalDB.Ore.ToString();
-        Food.text = _GlobalDB.Food.ToString();
-        Raw.text = _GlobalDB.Raw.ToString();
-        Colonists.text = _GlobalDB.Colonists.ToString();
-        Debug.Log(Rover.text);
-        Debug.Log(_GlobalDB.Rover.ToString());
+        //Debug.Log(_GlobalDB.Colonists.ToString());
+        //Debug.Log(_GlobalDB.MasRes.Length.ToString());
+        //Time.text = _GlobalDB.Time.ToString();
+        Time.text           = _GlobalDB.MasRes[_GlobalDB.Time].ToString();
+        Rover.text          = _GlobalDB.MasRes[_GlobalDB.Rover].ToString();
+        Alloy.text          = _GlobalDB.MasRes[_GlobalDB.Alloy].ToString();
+        Polymers.text       = _GlobalDB.MasRes[_GlobalDB.Polymers].ToString();
+        Electronics.text    = _GlobalDB.MasRes[_GlobalDB.Electronics].ToString();
+        Water.text          = _GlobalDB.MasRes[_GlobalDB.Water].ToString();
+        Re.text             = _GlobalDB.MasRes[_GlobalDB.Re].ToString();
+        Energy.text         = _GlobalDB.MasRes[_GlobalDB.Energy].ToString();
+        Chemicals.text      = _GlobalDB.MasRes[_GlobalDB.Chemicals].ToString();
+        Ore.text            = _GlobalDB.MasRes[_GlobalDB.Ore].ToString();
+        Food.text           = _GlobalDB.MasRes[_GlobalDB.Food].ToString();
+        Raw.text            = _GlobalDB.MasRes[_GlobalDB.Raw].ToString();
+        Colonists.text      = _GlobalDB.MasRes[_GlobalDB.Colonists].ToString();
+        //Debug.Log(Rover.text);
+
 
 
     }

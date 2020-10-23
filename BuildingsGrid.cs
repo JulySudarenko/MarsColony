@@ -4,11 +4,14 @@ public class BuildingsGrid : MonoBehaviour
 {
     #region Field
 
-    public Vector2Int GridSize = new Vector2Int(20, 10);
+    //public Vector2Int GridSize = new Vector2Int(20, 10);
+    //private Building[,] _grid;
 
-    private Building[,] _grid;
     private Building _flyingBuilding;
     private Camera _mainCamera;
+
+    [SerializeField] private GlobalDB _GlobalDB;
+    [SerializeField] private BackgroundUI _UI;
 
     #endregion
 
@@ -17,7 +20,7 @@ public class BuildingsGrid : MonoBehaviour
 
     private void Awake()
     {
-        _grid = new Building[GridSize.x, GridSize.y];
+        //_grid = new Building[GridSize.x, GridSize.y];
         _mainCamera = Camera.main;
     }
 
@@ -56,10 +59,17 @@ public class BuildingsGrid : MonoBehaviour
 
             bool available = true;
 
-            if (x < 0 || x > GridSize.x - _flyingBuilding.Size.x) available = false;
-            if (y < 0 || y > GridSize.y - _flyingBuilding.Size.y) available = false;
+            if (x < 0 || x > _GlobalDB.GridSize.x - _flyingBuilding.Size.x) available = false;
+            if (y < 0 || y > _GlobalDB.GridSize.y - _flyingBuilding.Size.y) available = false;
+            //if (x < 0 || x > GridSize.x - _flyingBuilding.Size.x) available = false;
+            //if (y < 0 || y > GridSize.y - _flyingBuilding.Size.y) available = false;
 
-            if(available && IsPlaceTaken(x,y)) available = false;
+            //_GlobalDB.isEnothRes(0);
+
+            if (!_GlobalDB.isEnothRes(0))
+                available = false;
+
+            if (available && IsPlaceTaken(x,y)) available = false;
 
             _flyingBuilding.transform.position = new Vector3(x, 0, y);
             _flyingBuilding.SetTransparent(available);
@@ -77,12 +87,18 @@ public class BuildingsGrid : MonoBehaviour
         {
             for (int y = 0; y < _flyingBuilding.Size.y; y++)
             {
-                _grid[placeX + x, placeY + y] = _flyingBuilding;
+                _GlobalDB._grid[placeX + x, placeY + y] = _flyingBuilding;
+                //_grid[placeX + x, placeY + y] = _flyingBuilding;
+
             }
         }
-
+        //добавить ID здания в список BuildList класса GlobalDB
+        _GlobalDB.BuildList.Add(_flyingBuilding.ID);
+        //вычесть потраченные ресурсы
+        _GlobalDB.BuildingCost(_flyingBuilding.ID);
+        _UI.Draw();
         _flyingBuilding.SetNormal();
-        _flyingBuilding = null;
+        _flyingBuilding = null;  
     }
 
     private bool IsPlaceTaken(int placeX, int placeY)
@@ -91,8 +107,9 @@ public class BuildingsGrid : MonoBehaviour
         {
             for (int y = 0; y < _flyingBuilding.Size.y; y++)
             {
-                if (_grid[placeX + x, placeY + y] != null)
-                    return true;
+                if (_GlobalDB._grid[placeX + x, placeY + y] != null)
+                //if (_grid[placeX + x, placeY + y] != null)
+                return true;
             }
         }
 
